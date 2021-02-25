@@ -1,0 +1,12 @@
+{
+    "nodes": [
+        {"name": "Sample", "key":"h"},
+        {"name": "Internet", "parent":"h", "key": "inet"},
+        {"name": "DNA", "parent":"h", "key": "DNA"},
+        {"name": "Hezner", "parent":"h", "key": "hezner"}
+    ],
+    "edges": [
+        {"src": "DNA", "dst": "inet", "color": "red"},
+        {"src": "Hezner", "dst": "inet", "color": "red"}
+    ]
+}
