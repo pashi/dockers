@@ -120,11 +120,11 @@ def main():
         with open(args.dotoutput, 'w') as f:
             f.write(x.source)
     if args.url:
-        url = '%s' % (url_prefix)
+        url = '%s' % (args.url)
         r = requests.post(url, json={"datatype": "dotty", "data": x.source})
         js = json.loads(r.content)
         id = js['uuid']
-        url = '%s/%s/png' % (url_prefix,id)
+        url = '%s/%s/png' % (args.url,id)
         print (url)
         r = requests.get(url, stream=True)
         print (r)
