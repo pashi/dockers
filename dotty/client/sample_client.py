@@ -31,3 +31,15 @@ if r.status_code == 200:
     with open(fname, 'wb') as out_file:
         shutil.copyfileobj(r.raw, out_file)
 del r
+
+
+url = '%s/%s/svg' % (url_prefix,id)
+print (url)
+r = requests.get(url, stream=True)
+print (r)
+if r.status_code == 200:
+    fname = 'output.svg'
+
+    with open(fname, 'wb') as out_file:
+        shutil.copyfileobj(r.raw, out_file)
+del r
