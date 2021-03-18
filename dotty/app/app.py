@@ -17,13 +17,17 @@ if not path.exists(datadir):
 def hello():
     abort(404)
 
-@app.route('/dia/<uuid:id>/png')
-def dia(id):
-    f = '%s.png' % (str(id))
+@app.route('/dia/<uuid:id>/<string:diaformat>')
+def dia(id,diaformat):
+    accepted_formats = ['png', 'svg']
+    if not diaformat in accepted_formats:
+        abort(404)
+    f = '%s.%s' % (str(id),diaformat)
     filename = path.join(datadir,f)
     if not path.exists(filename):
         abort(404)
-    return send_file(filename, mimetype='image/png')
+    m = 'image/%s' % (diaformat)
+    return send_file(filename, mimetype=m)
 
 @app.route('/dia', methods=['POST'])
 def dia_new():
@@ -44,6 +48,7 @@ def dia_new():
             dot = Source (data)
             filename = '%s' % (id)
             dot.render(filename, directory=datadir, format='png')
+            dot.render(filename, directory=datadir, format='svg')
 
     return jsonify({"uuid":id, })
     #return data
