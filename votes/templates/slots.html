@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<body>
+<p>{{ description }}</p>
+<table border="1">
+<tr>
+    <th>Slot</th>
+    <th>Active</th>
+    <th>Description</th>
+    <th>Answer</th>
+    <th>link</th>
+</tr>
+{% for item in slots %}
+</tr>
+<td>{{ item.slot }}</td>
+<td>{{ item.active }}</td>
+<td>{{ item.data | replace ('\n','<br/>\n') }}</td>
+<td>{{ item.answer }}</td>
+<td>{% if item.active == True %} <a href="/slots/{{ item.slot | replace ('slot','') }}">link</a>{% endif %}
+{% endfor %}
+</table>
+<hr>
+voting key: {{ key }}
+</body>
+</html>

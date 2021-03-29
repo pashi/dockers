@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<form action="/slots/{{ slot | replace ('slot','') }}" method="post">
+{% for item in answers %}
+  <input type="radio" name="vote" value="{{ item.answerkey }}"> {{ item.answervalue }} <br>
+{% endfor %}
+{% if voted is false %}
+<p><input type = 'submit' value = 'Login'/></p>
+{% endif %}
+</form>
+
+<hr>
+voting key: {{ key }}
+</body>
+</html>
