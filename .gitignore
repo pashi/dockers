@@ -3,3 +3,5 @@
 */output.gif
 .DS_Store
 */.DS_Store
+*/.env
+feedreader/*.json
