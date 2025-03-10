@@ -4,11 +4,13 @@
 
 My mac mini have too old device..
 
+````
 Mar 09 23:38:36 mmini kernel: NVRM: The NVIDIA GeForce 320M GPU installed in this system is
                               NVRM:  supported through the NVIDIA 340.xx Legacy drivers. Please
                               NVRM:  visit http://www.nvidia.com/object/unix.html for more
                               NVRM:  information.  The 535.216.01 NVIDIA driver will ignore
                               NVRM:  this GPU.  Continuing probe...
+````
 
 # Building and running
 ````
