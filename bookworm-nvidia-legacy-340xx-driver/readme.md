@@ -22,9 +22,11 @@ pashi@srv1:~/src/nvidia-legacy$ podman run -d --rm --name nvidia -p 20080:80 nvi
 
 # Use source
 
+````
 root@mmini:~# echo 'deb [trusted=yes] http://192.168.1.6:20080/ bookworm non-free' > /etc/apt/sources.list.d/nvidia.list
 root@mmini:~# apt install nvidia-legacy-340xx-driver nvidia-settings-legacy-340xx
+````
 
 ## References
-
+* https://www.pashi.net/post/2025-03-10-mac-mini/
 * https://gist.github.com/Anakiev2/b828ed2972c04359d52a44e9e5cf2c63
