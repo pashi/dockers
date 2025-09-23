@@ -1,0 +1,13 @@
+FROM docker.io/library/debian:13 AS dev
+ARG DEBIAN_FRONTEND=noninteractive
+RUN mkdir -p /data/pk2cmd
+RUN apt-get update && apt-get -y install libusb-dev git make g++
+COPY pk2cmd/* /data/pk2cmd/
+WORKDIR /data/pk2cmd
+RUN make linux
+
+FROM docker.io/library/debian:13 as RESULT
+COPY --from=dev /data/pk2cmd/pk2cmd /usr/bin/pk2cmd
+ARG DEBIAN_FRONTEND=noninteractive
+RUN apt-get -y update && apt-get -y install libusb-0.1-4
+
