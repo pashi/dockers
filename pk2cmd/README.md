@@ -1,4 +1,4 @@
-# pk2cmd in
+# pk2cmd
 
 pk2cmd - Command line tool for pic programmers
 
