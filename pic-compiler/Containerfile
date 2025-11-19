@@ -1,0 +1,17 @@
+FROM docker.io/library/debian:13 AS dev
+ARG DEBIAN_FRONTEND=noninteractive
+RUN apt-get -y update && apt-get -y install automake autoconf make subversion gcc g++ python3 bison flex zlib1g-dev libboost-dev libboost-graph-dev libboost-all-dev git gputils && apt-get clean
+RUN mkdir -p /app
+WORKDIR /app
+RUN svn checkout --trust-server-cert --non-interactive https://svn.code.sf.net/p/sdcc/code/trunk sdcc-code
+RUN git clone https://github.com/diegoherranz/sdcc-examples.git sdcc-examples
+WORKDIR /app/sdcc-code/sdcc
+RUN autoconf && ./configure --prefix=/opt/sdcc --disable-mcs51-port --disable-z80-port --disable-z180-port --disable-r2k-port --disable-r2ka-port --disable-r3ka-port --disable-r4k-port --disable-r5k-port --disable-r6k-port --disable-sm83-port --disable-tlcs90-port --disable-ez80-port --disable-z80n-port --disable-r800-port --disable-ds390-port --disable-ds400-port --disable-hc08-port --disable-s08-port --disable-stm8-port --disable-pdk13-port --disable-pdk14-port --disable-pdk15-port --disable-mos6502-port --disable-mos65c02-port --disable-f8-port --disable-f8l-port && make && make install
+
+FROM docker.io/library/debian:13 AS result
+ARG DEBIAN_FRONTEND=noninteractive
+RUN apt-get -y update && apt-get -y install gputils make && apt-get clean
+COPY --from=dev /app/sdcc-examples /usr/share/sdcc-examples
+COPY --from=dev /app/sdcc-code /usr/share/sdcc-code
+COPY --from=dev /opt/sdcc /opt/sdcc
+ENV PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/opt/sdcc/bin
