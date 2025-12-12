@@ -1,0 +1,5 @@
+FROM alpine:3.23
+MAINTAINER pasi@pashi.net
+RUN apk add --update graphviz
+WORKDIR /app
+ENTRYPOINT ["/usr/bin/dot"]
