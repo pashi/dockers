@@ -1,0 +1,6 @@
+FROM docker.io/library/debian:13
+ARG DEBIAN_FRONTEND=noninteractive
+RUN apt-get -y update && apt-get install -y expect
+ADD xc8-v3.10-full-install-linux-x64-installer.run /
+ADD installer.expect /
+RUN chmod +x /xc8-v3.10-full-install-linux-x64-installer.run /installer.expect && mkdir -p /opt && /installer.expect

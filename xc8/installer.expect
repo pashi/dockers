@@ -1,0 +1,47 @@
+#!/usr/bin/expect -f
+
+#spawn /xc8-v3.10-full-install-linux-x64-installer.run --debuglevel 4
+spawn /xc8-v3.10-full-install-linux-x64-installer.run  --unattendedmodeui minimal --debuglevel 4 --mode text --prefix /opt
+
+
+expect {
+    "Press*Enter*to continue:" { 
+        sleep 1
+        send "\r\n"
+        exp_continue
+    }
+    "Do you accept this license*" {
+        sleep 1
+        send "y\r\n"
+        exp_continue
+    }
+    "Please choose an option*" {
+        sleep 1
+        send "1\r\n"
+        exp_continue
+    }
+    "Installation Directory" {
+        sleep 1
+        send "\n"
+        exp_continue
+    }
+    "Click to purchase a PRO license" {
+        sleep 1
+        send "n\n"
+        exp_continue
+    }
+    "Click here to get a free*" {
+        sleep 1
+        send "n\n"
+        exp_continue
+    }
+    "Add xc8 to the PATH environment" {
+        sleep 1
+        send "n\n"
+        exp_continue
+    }
+
+    "something" {
+       send "y\r\n"
+    }
+}
