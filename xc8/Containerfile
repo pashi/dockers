@@ -15,4 +15,5 @@ RUN /usr/sbin/useradd developer
 USER developer
 VOLUME /app
 WORKDIR /app
+ENV PATH=/usr/bin:/opt/bin
 CMD "/bin/bash"
