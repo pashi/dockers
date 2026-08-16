@@ -1,7 +1,7 @@
 #!/usr/bin/expect -f
 
 #spawn /xc8-v3.10-full-install-linux-x64-installer.run --debuglevel 4
-spawn /xc8-v3.10-full-install-linux-x64-installer.run  --unattendedmodeui minimal --debuglevel 4 --mode text --prefix /opt
+spawn /xc8.run  --unattendedmodeui minimal --debuglevel 4 --mode text --prefix /opt
 
 
 expect {
