@@ -3,7 +3,7 @@ ARG DEBIAN_FRONTEND=noninteractive
 RUN apt-get -y update && apt-get install -y expect unzip && apt-get clean
 COPY downloads/ /downloads/
 ADD installer.expect /
-RUN chmod +x /downloads/*run /installer.expect && mkdir -p /opt && ln -s /downloads/xc8*run /xc8.run && /installer.expect
+RUN chmod +x /downloads/*run /installer.expect && mkdir -p /opt && /installer.expect
 ADD unpacker.sh /
 #WORKDIR /downloads/packs
 RUN chmod +x /unpacker.sh && /unpacker.sh

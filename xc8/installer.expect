@@ -1,43 +1,63 @@
 #!/usr/bin/expect -f
 
 #spawn /xc8-v3.10-full-install-linux-x64-installer.run --debuglevel 4
-spawn /xc8.run  --unattendedmodeui minimal --debuglevel 4 --mode text --prefix /opt
+spawn /downloads/xc8.run  --unattendedmodeui minimal --debuglevel 4 --mode text --prefix /opt
 
 
 expect {
     "Press*Enter*to continue:" { 
         sleep 1
-        send "\r\n"
+        send "\r"
+        expect -re ".+"
         exp_continue
     }
-    "Do you accept this license*" {
+    "Do you accept this license*:" {
         sleep 1
-        send "y\r\n"
+        send "y\r"
+        expect -re ".+"
+        exp_continue
+    }
+    "https://www.microchip.com/packs*:" {
+        sleep 1
+        send "n\r"
+        expect -re ".+"
         exp_continue
     }
     "Please choose an option*" {
         sleep 1
-        send "1\r\n"
+        send "1\r"
+        expect -re ".+"
         exp_continue
     }
     "Installation Directory" {
         sleep 1
-        send "\n"
+        send "/opt\r\n"
+        expect -re ".+"
         exp_continue
     }
+    "Apply settings to all users of this machine*" {
+        sleep 0.5
+        send "N\r\n"
+        expect -re ".+"
+        exp_continue
+    }
+
     "Click to purchase a PRO license" {
         sleep 1
-        send "n\n"
+        send "n\r"
+        expect -re ".+"
         exp_continue
     }
     "Click here to get a free*" {
         sleep 1
-        send "n\n"
+        send "n\r"
+        expect -re ".+"
         exp_continue
     }
     "Add xc8 to the PATH environment" {
         sleep 1
-        send "n\n"
+        send "n\r"
+        expect -re ".+"
         exp_continue
     }
 

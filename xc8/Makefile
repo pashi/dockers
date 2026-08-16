@@ -2,6 +2,9 @@ CRI?=podman
 PROJ?=xc8
 PACKDIR=packs
 DLDIR:=downloads
+XC8VERSION ?= 4.00
+XC8DOWNLOADURL ?= https://ww1.microchip.com/downloads/aemDocuments/documents/DEV/ProductDocuments/SoftwareTools/xc8-v$(XC8VERSION)-full-install-linux-x64-installer.run
+LOGFILE := /tmp/xc.log
 
 # e.g.
 # https://packs.download.microchip.com/Microchip.PIC10-12Fxxx_DFP.1.9.189.atpack
@@ -23,8 +26,8 @@ fetch: fetch-installer fetch-packs
 
 fetch-installer:
 	mkdir -p $(DLDIR)
-	curl -o $(DLDIR)/xc8-v3.10-full-install-linux-x64-installer.run https://ww1.microchip.com/downloads/aemDocuments/documents/DEV/ProductDocuments/SoftwareTools/xc8-v3.10-full-install-linux-x64-installer.run
-	chmod +x $(DLDIR)/xc8-v3.10-full-install-linux-x64-installer.run
+	curl -o $(DLDIR)/xc8.run $(XC8DOWNLOADURL)
+	chmod +x $(DLDIR)/xc8.run
 
 fetch-packs:
 	$(call fetch_microchip_pack,PIC16F1xxxx_DFP,1.31.465)
@@ -43,3 +46,8 @@ clean-packs:
 
 clean-download:
 	rm -rf $(DLDIR)
+
+update-public-dockers:
+	echo 'sync from forgejo' > $(LOGFILE)
+	git log -1 --pretty=%B >> $(LOGFILE)
+	(cp * ../dockers/xc8/ && cd ../dockers/xc8/ && pwd && git commit . -F $(LOGFILE) --edit)
