@@ -50,4 +50,4 @@ clean-download:
 update-public-dockers:
 	echo 'sync from forgejo' > $(LOGFILE)
 	git log -1 --pretty=%B >> $(LOGFILE)
-	(cp * ../dockers/xc8/ && cd ../dockers/xc8/ && pwd && git commit . -F $(LOGFILE) --edit)
+	(cp * ../dockers/xc8/ && cd ../dockers/xc8/ && git remote get-url origin|grep github.com|grep pashi/dockers && git commit . -F $(LOGFILE) --edit)
